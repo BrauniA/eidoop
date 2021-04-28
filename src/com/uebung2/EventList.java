@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 
 public class EventList<E> implements IEventQueue<E> {
-    private LinkedList<Entry<E>> queue = new LinkedList<>();
+    private final LinkedList<Entry<E>> queue = new LinkedList<>();
 
     @Override
     public void enqueue(Double time, E event) {

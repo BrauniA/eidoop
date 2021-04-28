@@ -1,8 +1,8 @@
 package com.uebung2;
 
 public class EventEntry<E> implements IEventQueue.Entry<E> {
-    private E event;
-    private Double time;
+    private final E event;
+    private final Double time;
 
     public EventEntry(Double time, E event) {
         this.event = event;

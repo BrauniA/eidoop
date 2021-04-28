@@ -1,7 +1,5 @@
 package com.uebung2;
 
-import jdk.jfr.Event;
-
 public class UnsortedArrayQueue<E> implements IEventQueue<E> {
     private EventEntry<E>[] entries;
     private int currentIndex = 0;
@@ -26,7 +24,7 @@ public class UnsortedArrayQueue<E> implements IEventQueue<E> {
     }
 
     @Override
-    public EventEntry dequeue() {
+    public EventEntry<E> dequeue() {
         // Find the element with the lowest time
         int elementIndex = 0;
         Double lowestTime = Double.MAX_VALUE;
@@ -41,9 +39,8 @@ public class UnsortedArrayQueue<E> implements IEventQueue<E> {
         EventEntry<E> lowestTimeEntry = entries[elementIndex];
 
         // Rearrange the following elements
-        for (int i = elementIndex; i < currentIndex - 1; i++) {
-            entries[i] = entries[i + 1];
-        }
+        if (currentIndex - 1 - elementIndex >= 0)
+            System.arraycopy(entries, elementIndex + 1, entries, elementIndex, currentIndex - 1 - elementIndex);
 
         // Remove the last element of the array
         currentIndex -= 1;

@@ -30,9 +30,8 @@ public class SortedArrayQueue<E> implements IEventQueue<E>{
         }
 
         // Move all elements starting by insertIndex up
-        for (int i = currentIndex; i > insertIndex; i--) {
-            entries[i] = entries[i - 1];
-        }
+        if (currentIndex - insertIndex >= 0)
+            System.arraycopy(entries, insertIndex, entries, insertIndex + 1, currentIndex - insertIndex);
         currentIndex += 1;
         entries[insertIndex] = entry;
 
@@ -45,7 +44,7 @@ public class SortedArrayQueue<E> implements IEventQueue<E>{
     }
 
     @Override
-    public EventEntry dequeue() {
+    public EventEntry<E> dequeue() {
         // Save the element with the lowest time
         EventEntry<E> lowestTimeEntry = entries[currentIndex];
 
