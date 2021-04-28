@@ -68,5 +68,4 @@ public class Tamagotchi {
         this.play();
         this.sleep();
     }
-
 }
